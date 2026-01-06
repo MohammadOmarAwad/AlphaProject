@@ -1,0 +1,21 @@
+@DateProviderUI_HostAddress = https://localhost:7067
+
+GET {{BookReader_HostAddress}}/api/person/GetPersonList
+
+###
+
+POST {{BookReader_HostAddress}}/api/person/AddPerson
+Content-Type: application/json
+
+{
+  "guidperson": "string",
+  "firstName": "string2",
+  "lastName": "string2"
+}
+
+###
+
+@id=514a4ba5-5649-44e4-825d-e01d6de3933b
+POST {{BookReader_HostAddress}}/api/person/DeletePerson?id={{id}}
+
+###

@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interface", "Interface", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateProviderUI", "Interface\DateProviderUI\DateProviderUI.csproj", "{CC74E3CB-A240-44F4-84F2-2851DCA247F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FireBaseDB", "Libraries\FireBaseDB\FireBaseDB.csproj", "{6B63FBF8-3D58-8C35-C98E-2618671F02B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{CC74E3CB-A240-44F4-84F2-2851DCA247F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC74E3CB-A240-44F4-84F2-2851DCA247F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC74E3CB-A240-44F4-84F2-2851DCA247F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B63FBF8-3D58-8C35-C98E-2618671F02B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B63FBF8-3D58-8C35-C98E-2618671F02B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B63FBF8-3D58-8C35-C98E-2618671F02B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B63FBF8-3D58-8C35-C98E-2618671F02B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{DD18887D-2717-44AF-B850-7C8E0F14C498} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{268636EF-990E-4347-AC57-BD3FAA19B137} = {ED00AF61-5B47-46AA-836B-18E89F654937}
 		{CC74E3CB-A240-44F4-84F2-2851DCA247F7} = {B781E14E-28D6-4B54-82A0-29B73DB975BC}
+		{6B63FBF8-3D58-8C35-C98E-2618671F02B0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E69E408D-534A-4118-AC14-E820D28DFB64}

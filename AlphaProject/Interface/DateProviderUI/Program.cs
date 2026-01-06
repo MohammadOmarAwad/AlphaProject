@@ -1,11 +1,19 @@
 using DateProvider;
+using FireBaseDB.DB;
+using FireBaseDB.DB.Impl;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+//Dependency injection, inject with parameters
+var fireBase_AuthSecret = builder.Configuration.GetValue<string>("FireBaseConfigrations:AuthSecret") ??  throw new InvalidOperationException(" not found.");
+var fireBase_BasePath = builder.Configuration.GetValue<string>("FireBaseConfigrations:BasePath") ??  throw new InvalidOperationException(" not found.");
+
+builder.Services.AddSingleton<IFireBaseDBContext>(provider => new FireBaseDBContext(fireBase_AuthSecret, fireBase_BasePath));
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
