@@ -1,8 +1,8 @@
-﻿using FireBaseDB.Model;
-using FireSharp;
+﻿using FireSharp;
 using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
+using ModleLibrary.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -34,7 +34,7 @@ namespace FireBaseDB.DB.Impl
 
                 if (setResponse.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    return "Added Succesfully";
+                    return person.GuidPerson;
                 }
                 else
                 {

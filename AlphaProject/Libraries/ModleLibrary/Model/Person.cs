@@ -1,4 +1,4 @@
-﻿namespace FireBaseDB.Model
+﻿namespace ModleLibrary.Model
 {
     /// <summary>
     /// Represents a person record stored in the Firebase database.
