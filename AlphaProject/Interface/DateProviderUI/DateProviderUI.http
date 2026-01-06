@@ -1,0 +1,5 @@
+@DateProviderUI_HostAddress = https://localhost:7067
+
+GET {{DateProviderUI_HostAddress}}/DateProvider
+
+###
