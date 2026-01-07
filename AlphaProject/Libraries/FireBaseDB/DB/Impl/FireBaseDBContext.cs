@@ -4,7 +4,6 @@ using FireSharp.Interfaces;
 using FireSharp.Response;
 using ModleLibrary.Model;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Net;
 
 namespace FireBaseDB.DB.Impl
@@ -15,7 +14,7 @@ namespace FireBaseDB.DB.Impl
         IFirebaseClient client;
 
         /// <inheritdoc />
-        public FireBaseDBContext(String _AuthSecret, String _BasePath)
+        public FireBaseDBContext(String? _AuthSecret, String? _BasePath)
         {
             client = new FirebaseClient(new FirebaseConfig()
             {
@@ -25,17 +24,23 @@ namespace FireBaseDB.DB.Impl
         }
 
         /// <inheritdoc />
-        public string AddPerson(Person person)
+        public String? AddPerson(Person? person)
         {
             try
             {
+                if (person is null)
+                {
+                    throw new InvalidOperationException("Person cannot be null here.");
+                }
+
                 person.GuidPerson = Guid.NewGuid().ToString();
-                var data = person;
-                SetResponse setResponse = client.Set("Persons/" + data.GuidPerson, data);
+                Person? data = person;
+
+                SetResponse setResponse = client.Set("Persons/" + data?.GuidPerson, data);
 
                 if (setResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    return person.GuidPerson;
+                    return person?.GuidPerson;
                 }
                 else
                 {
@@ -44,62 +49,62 @@ namespace FireBaseDB.DB.Impl
             }
             catch (Exception ex)
             {
-                return $"Something went wrong!! {ex.Message}";
+                throw new ArgumentException(ex.Message);
             }
         }
 
         /// <inheritdoc />
-        public List<Person> GetPersonList()
+        public List<Person>? GetPersonList()
         {
-            List<Person> list = new List<Person>();
+            List<Person> list = new ();
             try
             {
                 FirebaseResponse response = client.Get("Persons");
 
                 if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrWhiteSpace(response.Body))
                 {
-                    dynamic data = JsonConvert.DeserializeObject<dynamic>(value: response.Body);
+                    var data = JsonConvert.DeserializeObject<Dictionary<Guid, Person>>(response.Body)  ?? throw new NullReferenceException("Response body was null");
 
                     if (data != null)
                     {
                         foreach (var item in data)
                         {
-                            list.Add(JsonConvert.DeserializeObject<Person>(((JProperty)item).Value.ToString()));
+                            list.Add(item.Value);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new ArgumentException(ex.Message);
             }
 
             return list;
         }
 
         /// <inheritdoc />
-        public Person? GetPerson(string GuidPerson)
+        public Person? GetPerson(String? GuidPerson)
         {
-            Person data=new Person();
+            Person data = new();
 
             try
             {
                 FirebaseResponse response = client.Get("Persons/" + GuidPerson);
                 if (response.StatusCode == HttpStatusCode.OK && !string.IsNullOrWhiteSpace(response.Body))
                 {
-                    data = JsonConvert.DeserializeObject<Person>(response.Body);
+                    data = JsonConvert.DeserializeObject<Person>(response.Body) ?? throw new NullReferenceException();
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new ArgumentException(ex.Message);
             }
 
             return data;
         }
 
         /// <inheritdoc />
-        public Boolean? UpdatePerson(Person person)
+        public Boolean? UpdatePerson(Person? person)
         {
             try
             {
@@ -112,14 +117,14 @@ namespace FireBaseDB.DB.Impl
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new ArgumentException(ex.Message);
             }
 
             return true;
         }
 
         /// <inheritdoc />
-        public Boolean? DeletePerson(string GuidPerson)
+        public Boolean? DeletePerson(String? GuidPerson)
         {
             try
             {
@@ -132,7 +137,7 @@ namespace FireBaseDB.DB.Impl
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new ArgumentException(ex.Message);
             }
 
             return true;

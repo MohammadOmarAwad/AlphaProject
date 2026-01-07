@@ -14,7 +14,7 @@ namespace FireBaseDB.Test.Base
             Assembly assembly = Assembly.GetExecutingAssembly();
             String result;
 
-            using (Stream stream = assembly.GetManifestResourceStream(ressourcePath))
+            using (Stream stream = assembly.GetManifestResourceStream(ressourcePath) ?? throw new InvalidOperationException($"Embedded resource not found: {ressourcePath}"))
             using (StreamReader reader = new StreamReader(stream))
             {
                 result = reader.ReadToEnd();

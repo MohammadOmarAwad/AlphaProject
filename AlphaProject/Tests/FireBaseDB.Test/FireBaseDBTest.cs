@@ -18,9 +18,9 @@ namespace FireBaseDB.Test
         public void TestInitialize()
         {
             String jsonRequest = LoadInputData("FireBaseDB.Test.local.settings.json");
-            LocalSettings localSettings = JsonConvert.DeserializeObject<LocalSettings>(jsonRequest);
+            LocalSettings localSettings = JsonConvert.DeserializeObject<LocalSettings>(jsonRequest) ?? throw new ArgumentNullException();
 
-            fireBaseDBContext = new FireBaseDBContext(localSettings.FireBase_AuthSecret, localSettings.FireBase_BasePath);
+            fireBaseDBContext = new FireBaseDBContext(localSettings?.FireBase_AuthSecret, localSettings?.FireBase_BasePath);
             dateProvider = new DateProvider.Impl.DateProvider();
         }
 
@@ -33,19 +33,20 @@ namespace FireBaseDB.Test
         [DataRow("name1", "LastName1")]
         [DataRow("name2", "LastName2")]
         [DataRow("name3", "LastName3")]
-        public void AddPersonTest(string firstName, string lastName)
+        public void AddPersonTest(String firstName, String lastName)
         {
             // Arrange
             TestDataFactory testDataFactory = new TestDataFactory();
             Person? person = testDataFactory.CreatePerson(firstName, lastName);
+
             if (person != null && dateProvider != null)
             {
                 person.CreatedOn = dateProvider.GetCurrentDateGermanyFormate();
             }
 
             // Act
-            string guid = fireBaseDBContext.AddPerson(person);
-            Person result = fireBaseDBContext.GetPerson(guid);
+            String? guid = fireBaseDBContext?.AddPerson(person);
+            Person? result = fireBaseDBContext?.GetPerson(guid);
 
             // Assert
             Assert.IsNotNull(result);
@@ -65,7 +66,7 @@ namespace FireBaseDB.Test
             TestDataFactory testDataFactory = new TestDataFactory();
 
             // Act
-            List<Person> result = fireBaseDBContext.GetPersonList();
+            List<Person>? result = fireBaseDBContext?.GetPersonList();
 
             // Assert
             Assert.IsNotNull(result);

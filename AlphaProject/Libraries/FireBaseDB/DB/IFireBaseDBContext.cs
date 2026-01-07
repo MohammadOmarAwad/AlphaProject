@@ -23,7 +23,7 @@ namespace FireBaseDB.DB
         /// The generated identifier for the newly created person record.
         /// Returns an empty string or null only if creation failed (implementation-defined). Consumers should verify the result.
         /// </returns>
-        String AddPerson(Person person);
+        String? AddPerson(Person? person);
 
         /// <summary>
         /// Deletes the person with the specified identifier from the database.
@@ -32,7 +32,7 @@ namespace FireBaseDB.DB
         /// <returns>
         /// True if the record was found and deleted; false if the record did not exist or deletion failed.
         /// </returns>
-        Boolean? DeletePerson(string id);
+        Boolean? DeletePerson(String? id);
 
         /// <summary>
         /// Retrieves a person record by its identifier.
@@ -41,7 +41,7 @@ namespace FireBaseDB.DB
         /// <returns>
         /// The <see cref="Person"/> with the specified id if found; otherwise null.
         /// </returns>
-        Person GetPerson(string id);
+        Person? GetPerson(String? id);
 
         /// <summary>
         /// Retrieves all person records from the database.
@@ -49,7 +49,7 @@ namespace FireBaseDB.DB
         /// <returns>
         /// A list containing all <see cref="Person"/> records. The returned list will be empty if no records exist.
         /// </returns>
-        List<Person> GetPersonList();
+        List<Person>? GetPersonList();
 
         /// <summary>
         /// Updates an existing person record in the database.
@@ -58,6 +58,6 @@ namespace FireBaseDB.DB
         /// <returns>
         /// True if the update succeeded; false if the record was not found or the update failed.
         /// </returns>
-        Boolean? UpdatePerson(Person person);
+        Boolean? UpdatePerson(Person? person);
     }
 }

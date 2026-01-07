@@ -30,7 +30,7 @@ namespace UserUI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetPersonList")]
-        public List<Person> GetPersonList()
+        public List<Person>? GetPersonList()
         {
             try
             {
@@ -68,7 +68,7 @@ namespace UserUI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("AddPerson")]
-        public string AddPerson_FireBase(Person person)
+        public String? AddPerson_FireBase(Person person)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace UserUI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("DeletePerson")]
-        public Boolean? DeletePerson_FireBase(string id)
+        public Boolean? DeletePerson_FireBase(String id)
         {
             try
             {
