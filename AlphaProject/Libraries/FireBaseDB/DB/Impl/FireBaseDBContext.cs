@@ -99,7 +99,7 @@ namespace FireBaseDB.DB.Impl
         }
 
         /// <inheritdoc />
-        public Boolean UpdatePerson(Person person)
+        public Boolean? UpdatePerson(Person person)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace FireBaseDB.DB.Impl
         }
 
         /// <inheritdoc />
-        public Boolean DeletePerson(string GuidPerson)
+        public Boolean? DeletePerson(string GuidPerson)
         {
             try
             {

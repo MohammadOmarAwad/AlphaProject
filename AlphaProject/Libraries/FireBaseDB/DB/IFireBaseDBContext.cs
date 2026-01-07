@@ -32,7 +32,7 @@ namespace FireBaseDB.DB
         /// <returns>
         /// True if the record was found and deleted; false if the record did not exist or deletion failed.
         /// </returns>
-        bool DeletePerson(string id);
+        Boolean? DeletePerson(string id);
 
         /// <summary>
         /// Retrieves a person record by its identifier.
@@ -58,6 +58,6 @@ namespace FireBaseDB.DB
         /// <returns>
         /// True if the update succeeded; false if the record was not found or the update failed.
         /// </returns>
-        Boolean UpdatePerson(Person person);
+        Boolean? UpdatePerson(Person person);
     }
 }

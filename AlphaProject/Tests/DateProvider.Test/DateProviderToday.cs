@@ -7,6 +7,23 @@
         /// Tests that the DateProvider returns today's date.
         /// </summary>
         [TestMethod]
+        public void DateProviderFormateTest()
+        {
+            // Arrange
+            var dateProvider = new Impl.DateProvider();
+
+            // Act
+            var result = dateProvider.GetCurrentDateGermanyFormate();
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result?.Contains('.'));
+        }
+
+        /// <summary>
+        /// Tests that the DateProvider returns today's date.
+        /// </summary>
+        [TestMethod]
         public void DateProviderTodayTest()
         {
             // Arrange

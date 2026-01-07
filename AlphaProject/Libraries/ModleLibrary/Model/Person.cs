@@ -10,16 +10,21 @@
         /// Gets or sets the unique identifier for the person.
         /// This typically maps to the Firebase key or a GUID used to identify the person record.
         /// </summary>
-        public string? GuidPerson { get; set; }
+        public String? GuidPerson { get; set; }
 
         /// <summary>
         /// Gets or sets the person's first name.
         /// </summary>
-        public string? FirstName { get; set; }
+        public String? FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the person's last name.
         /// </summary>
-        public string? LastName { get; set; }
+        public String? LastName { get; set; }
+
+        /// <summary>
+        /// Date of Creation
+        /// </summary>
+        public String? CreatedOn { get; set; }
     }
 }

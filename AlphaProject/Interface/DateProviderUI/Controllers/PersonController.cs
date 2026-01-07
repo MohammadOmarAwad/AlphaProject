@@ -1,6 +1,7 @@
-﻿using FireBaseDB.DB;
-using FireBaseDB.Model;
+﻿using DateProvider;
+using FireBaseDB.DB;
 using Microsoft.AspNetCore.Mvc;
+using ModleLibrary.Model;
 
 namespace DateProviderUI.Controllers
 {
@@ -10,12 +11,17 @@ namespace DateProviderUI.Controllers
     {
         private readonly ILogger<PersonController> _logger;
         public readonly IFireBaseDBContext FireBaseDB;
+        private readonly IDateProvider DateProvider;
 
-        public PersonController(ILogger<PersonController> logger,
-            IFireBaseDBContext fireBaseDB)
+        public PersonController(
+            ILogger<PersonController> logger,
+            IFireBaseDBContext fireBaseDB,
+            IDateProvider dateProvider
+            )
         {
             _logger = logger;
             FireBaseDB = fireBaseDB;
+            DateProvider = dateProvider;
         }
 
         /// <summary>
@@ -26,7 +32,14 @@ namespace DateProviderUI.Controllers
         [Route("GetPersonList")]
         public List<Person> GetPersonList()
         {
-            return FireBaseDB.GetPersonList();
+            try
+            {
+                return FireBaseDB?.GetPersonList();
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         /// <summary>
@@ -38,7 +51,14 @@ namespace DateProviderUI.Controllers
         [Route("GetPerson")]
         public Person? GetPerson_FireBase(string id)
         {
-            return FireBaseDB.GetPerson(id);
+            try
+            {
+                return FireBaseDB?.GetPerson(id);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         /// <summary>
@@ -50,7 +70,15 @@ namespace DateProviderUI.Controllers
         [Route("AddPerson")]
         public string AddPerson_FireBase(Person person)
         {
-            return FireBaseDB.AddPerson(person);
+            try
+            {
+                person.CreatedOn = DateProvider?.GetCurrentDateGermanyFormate();
+                return FireBaseDB?.AddPerson(person);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         /// <summary>
@@ -60,9 +88,16 @@ namespace DateProviderUI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("UpdatePerson")]
-        public bool UpdatePerson_FireBase(Person person)
+        public Boolean? UpdatePerson_FireBase(Person person)
         {
-            return FireBaseDB.UpdatePerson(person);
+            try
+            {
+                return FireBaseDB?.UpdatePerson(person);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         /// <summary>
@@ -72,9 +107,16 @@ namespace DateProviderUI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("DeletePerson")]
-        public bool DeletePerson_FireBase(string id)
+        public Boolean? DeletePerson_FireBase(string id)
         {
-            return FireBaseDB.DeletePerson(id);
+            try
+            {
+                return FireBaseDB?.DeletePerson(id);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
     }
 }
