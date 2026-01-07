@@ -1,12 +1,15 @@
 ﻿using DateProvider;
 using FireBaseDB.DB;
 using FireBaseDB.DB.Impl;
+using FireBaseDB.Test.Base;
+using ModleLibrary.Base;
 using ModleLibrary.Model;
+using Newtonsoft.Json;
 
 namespace FireBaseDB.Test
 {
     [TestClass]
-    public sealed class FireBaseDBTest
+    public sealed class FireBaseDBTest : TestBase
     {
         private IFireBaseDBContext? fireBaseDBContext;
         private IDateProvider? dateProvider;
@@ -14,7 +17,10 @@ namespace FireBaseDB.Test
         [TestInitialize]
         public void TestInitialize()
         {
-            fireBaseDBContext = new FireBaseDBContext("1234u", "https://fir-db-470aa-default-rtdb.firebaseio.com");
+            String jsonRequest = LoadInputData("FireBaseDB.Test.local.settings.json");
+            LocalSettings localSettings = JsonConvert.DeserializeObject<LocalSettings>(jsonRequest);
+
+            fireBaseDBContext = new FireBaseDBContext(localSettings.FireBase_AuthSecret, localSettings.FireBase_BasePath);
             dateProvider = new DateProvider.Impl.DateProvider();
         }
 
