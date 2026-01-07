@@ -3,7 +3,7 @@ using FireBaseDB.DB;
 using Microsoft.AspNetCore.Mvc;
 using ModleLibrary.Model;
 
-namespace DateProviderUI.Controllers
+namespace UserUI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

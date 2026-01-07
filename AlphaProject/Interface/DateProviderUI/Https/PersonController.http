@@ -1,4 +1,4 @@
-@DateProviderUI_HostAddress = https://localhost:7067
+@UserUI_HostAddress = https://localhost:7067
 
 GET {{BookReader_HostAddress}}/api/person/GetPersonList
 

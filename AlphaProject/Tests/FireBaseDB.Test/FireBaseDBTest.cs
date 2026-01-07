@@ -1,4 +1,5 @@
-﻿using FireBaseDB.DB;
+﻿using DateProvider;
+using FireBaseDB.DB;
 using FireBaseDB.DB.Impl;
 using ModleLibrary.Model;
 
@@ -8,11 +9,13 @@ namespace FireBaseDB.Test
     public sealed class FireBaseDBTest
     {
         private IFireBaseDBContext? fireBaseDBContext;
+        private IDateProvider? dateProvider;
 
         [TestInitialize]
         public void TestInitialize()
         {
             fireBaseDBContext = new FireBaseDBContext("1234u", "https://fir-db-470aa-default-rtdb.firebaseio.com");
+            dateProvider = new DateProvider.Impl.DateProvider();
         }
 
         /// <summary>
@@ -28,7 +31,11 @@ namespace FireBaseDB.Test
         {
             // Arrange
             TestDataFactory testDataFactory = new TestDataFactory();
-            Person person = testDataFactory.CreatePerson(firstName,lastName);
+            Person? person = testDataFactory.CreatePerson(firstName, lastName);
+            if (person != null && dateProvider != null)
+            {
+                person.CreatedOn = dateProvider.GetCurrentDateGermanyFormate();
+            }
 
             // Act
             string guid = fireBaseDBContext.AddPerson(person);

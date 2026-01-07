@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\DateProvider\DateProvider.csproj" />
     <ProjectReference Include="..\..\Libraries\FireBaseDB\FireBaseDB.csproj" />
     <ProjectReference Include="..\..\Libraries\ModleLibrary\ModleLibrary.csproj" />
   </ItemGroup>
