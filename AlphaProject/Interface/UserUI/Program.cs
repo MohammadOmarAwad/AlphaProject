@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 var fireBase_AuthSecret = builder.Configuration.GetValue<string>("FireBaseConfigrations:AuthSecret") ??  throw new InvalidOperationException(" not found.");
 var fireBase_BasePath = builder.Configuration.GetValue<string>("FireBaseConfigrations:BasePath") ??  throw new InvalidOperationException(" not found.");
 
-builder.Services.AddSingleton<IFireBaseDBContext>(provider => new FireBaseDBContext(fireBase_AuthSecret, fireBase_BasePath));
+builder.Services.AddScoped<IFireBaseDBContext>(provider => new FireBaseDBContext(fireBase_AuthSecret, fireBase_BasePath));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
